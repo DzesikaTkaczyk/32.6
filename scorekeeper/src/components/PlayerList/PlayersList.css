@@ -1,0 +1,7 @@
+.PlayersList {
+	font-size: 18px;
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+}

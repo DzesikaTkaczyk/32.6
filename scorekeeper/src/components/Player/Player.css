@@ -1,0 +1,25 @@
+.Player {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 40px;
+	border: 1px solid;
+	margin: 0 auto;
+}
+
+.Player__name {
+	line-height: 40px;
+	padding: 0 15px;
+	width: 120px;
+}
+
+.Player__score {
+	width: 45px;
+	border-left: 1px solid black;
+	text-align: center;
+}
+
+.Player__button {
+	padding: 0 15px;
+	border-left: 1px solid black;
+}

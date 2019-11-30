@@ -4,20 +4,20 @@ import { shallow } from 'enzyme';
 import Player from '../Player/Player';
 
 it('renders without crashing', () => {
-  shallow(<PlayersList players={[]} />);
+	shallow(<PlayersList players={[]} />);
 });
 
 it('should check number of players', () => {
 	const players = [
-	    {
-	        name: 'Kunegunda',
-	        score: 5
-	    },
-	    {
-	        name: 'Antoś',
-	        score: 0
-	    }
-	]
+		{
+			name: 'Kunegunda',
+			score: 5
+		},
+		{
+			name: 'Antoś',
+			score: 0
+		}
+	];
 	const playerComponent = shallow(<PlayersList players={players} />);
 
 	const expectedPlayersNumber = playerComponent.find(Player).length;
@@ -27,18 +27,19 @@ it('should check number of players', () => {
 
 it('shoud update score', () => {
 	const players = [
-	    {
-	        name: 'Kunegunda',
-	        score: 5
-	    },
-	    {
-	        name: 'Antoś',
-	        score: 0
-	    }
-	]
+		{
+			name: 'Kunegunda',
+			score: 5
+		},
+		{
+			name: 'Antoś',
+			score: 0
+		}
+	];
 
 	const mockedOnScoreUpdate = jest.fn();
 	const playerComponent = shallow(<PlayersList players={players} onScoreUpdate={mockedOnScoreUpdate} />);
+	
 	const firstPlayer = playerComponent.find(Player).first();
 	const onPlayerScoreChange = firstPlayer.prop('onPlayerScoreChange');
 
@@ -46,3 +47,25 @@ it('shoud update score', () => {
 	
 	expect(mockedOnScoreUpdate).toBeCalledWith(0, 10);
 });
+
+it('should remove player from mockup', () => {
+	const players = [
+		{
+			name: 'Kunegunda',
+			score: 5
+		},
+		{
+			name: 'Antoś',
+			score: 0
+		}
+	];
+	
+	const mockedOnPlayerRemove = jest.fn();
+	const playerComponent = shallow(<PlayersList players={players} onPlayerRemove={mockedOnPlayerRemove} />);
+
+	const firstPlayer = playerComponent.find(Player).at(1)
+	const onPlayerRemove = firstPlayer.prop('onPlayerRemove');
+
+	onPlayerRemove(0);
+	expect(mockedOnPlayerRemove).toBeCalledWith(1)
+})

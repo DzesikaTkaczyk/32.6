@@ -11,16 +11,17 @@ it('renders without crashing', () => {
 
 it ('should update player score', () => {
 	const players = [
-	    {
-	        name: 'Kunegunda',
-	        score: 5
-	    },
-	    {
-	        name: 'Antoś',
-	        score: 0
-	    }
-	]
+		{
+			name: 'Kunegunda',
+			score: 5
+		},
+		{
+			name: 'Antoś',
+			score: 0
+		}
+	];
 
+	const appComponent = shallow(<App />);
 	appComponent.setState({ players });
 	const onScoreUpdate = appComponent.find(PlayersList).prop('onScoreUpdate');
 
@@ -31,16 +32,44 @@ it ('should update player score', () => {
 	playersAfterUpdate[0].score;
 
 	expect(playersAfterUpdate[0].score).toEqual(10);
-})
+});
 
 it('shoud add new player to aplication state', () => {
-	//const onPlayerAdd = jest.fn();
-	//const addPlayerComponent = mount(<AddPlayer onPlayerAdd={onPlayerAdd} />);
+	const appComponent = shallow(<App />);
 	const onPlayerAdd = appComponent.find(AddPlayer).prop('onPlayerAdd');
+
 	onPlayerAdd('Ania');
+
 	const players = appComponent.state('players');
 
 	expect(players.length).toEqual(1);
 	expect(players[0].name).toEqual('Ania');
 	expect(players[0].score).toEqual(0);
-})
+});
+
+it ('shouls remove player from player list', () => {
+	const appComponent = shallow(<App />);
+
+	const players = [
+		{
+			name: 'Kunegunda',
+			score: 5
+		},
+		{
+			name: 'Antoś',
+			score: 0
+		}
+	];
+
+	appComponent.setState({players});
+
+	const onPlayerRemove = appComponent.find(PlayersList).prop('onPlayerRemove');
+
+	onPlayerRemove(0)
+
+	const playerListNow = appComponent.state('players');
+
+	expect(playerListNow.length).toEqual(1);
+	expect(playerListNow[0].name).toEqual('Antoś');
+	expect(playerListNow[0].score).toEqual(2);
+});

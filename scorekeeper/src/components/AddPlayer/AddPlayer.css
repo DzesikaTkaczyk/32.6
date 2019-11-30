@@ -1,0 +1,21 @@
+.AddPlayer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 40px;
+	margin: 50px 0 40px;
+}
+
+.AddPlayer__input {
+	width: 255px;
+	font-size: 18px;
+	line-height: 40px;
+	padding: 0 15px;
+
+}
+
+.AddPlayer__submit {
+	height: 42px;
+	padding: 0 20px;
+	margin-left: 15px;
+}
